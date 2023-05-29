@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
+import Button from "./components/Button";
 import "./App.css";
 
 function App() {
@@ -10,7 +11,6 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("todo") !== null) {
       setTodo(JSON.parse(localStorage.getItem("todo")));
-    } else {
     }
   }, []);
 
@@ -48,6 +48,14 @@ function App() {
         })
       )
     );
+    if (JSON.parse(localStorage.getItem("todo")).length === 0) {
+      localStorage.removeItem("todo");
+    }
+  }
+
+  function deleteAllTodosHandler() {
+    setTodo([]);
+    localStorage.removeItem("todo");
   }
 
   return (
@@ -58,6 +66,11 @@ function App() {
           formSubmitHandler={formSubmitHandler}
           input={input}
         />
+        {todo.length > 0 && (
+          <div className="delete-selected-button-container">
+            <Button onClick={deleteAllTodosHandler}>Delete all</Button>
+          </div>
+        )}
         <TodoList todo={todo} deleteCurrentTodo={deleteCurrentTodo} />
       </div>
     </>
