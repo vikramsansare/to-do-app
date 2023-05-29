@@ -8,8 +8,9 @@ function App() {
   const [todo, setTodo] = useState([]);
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("todo")).length > 0) {
+    if (localStorage.getItem("todo") !== null) {
       setTodo(JSON.parse(localStorage.getItem("todo")));
+    } else {
     }
   }, []);
 
