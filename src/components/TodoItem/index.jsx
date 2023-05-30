@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./TodoItem.css";
 import Button from "../Button";
 
@@ -10,14 +10,15 @@ export default function TodoItem({
 }) {
   const [editTodo, setEditTodo] = useState(todo.title);
   const [editTodoState, setEditTodoState] = useState(false);
+  const singleTodoInputField = useRef(null);
 
   function newTodoEnterHandler(e) {
     setEditTodo(e.target.value);
   }
 
   function editTodoHandler() {
-    console.log(1);
     setEditTodoState(true);
+    singleTodoInputField.current.focus();
   }
 
   function updateCurrentTodoHandler(id) {
@@ -40,6 +41,7 @@ export default function TodoItem({
         onChange={newTodoEnterHandler}
         readOnly={!editTodoState}
         autoFocus={editTodoState}
+        ref={singleTodoInputField}
       />
       {!editTodoState && <Button onClick={editTodoHandler}>Edit</Button>}
       {editTodoState && (
