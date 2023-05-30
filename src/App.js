@@ -17,7 +17,7 @@ function App() {
 
   function formSubmitHandler(e) {
     e.preventDefault();
-    setTodo([{ id: new Date().getTime(), title: input }, ...todo]);
+    setTodo([{ id: new Date().getTime(), title: input.trim() }, ...todo]);
     localStorage.setItem(
       "todo",
       JSON.stringify([
@@ -88,7 +88,6 @@ function App() {
   // }
 
   function updateCurrentTodo(id, currentTodo) {
-    console.log(id, currentTodo);
     setTodo(
       todo.map((item) => {
         if (item.id === id) {
