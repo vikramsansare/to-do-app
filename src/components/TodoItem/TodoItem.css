@@ -8,7 +8,14 @@
     gap: 5px;
 }
 
-.todo-item p {
+.todo-item input,
+.todo-item input:focus {
     flex-basis: 100%;
+}
+
+.todo-item input:read-only {
     color: #fff;
+    border: 0;
+    background-color: transparent;
+    outline: 0;
 }

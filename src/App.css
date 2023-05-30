@@ -148,7 +148,8 @@ body {
 .todo-main-wrap {
   border: 1px solid #fff;
   padding: 20px;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .delete-selected-button-container {

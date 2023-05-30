@@ -7,6 +7,7 @@ import "./App.css";
 function App() {
   const [input, setInput] = useState("");
   const [todo, setTodo] = useState([]);
+  // const [checkedTodo, setCheckedTodo] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("todo") !== null) {
@@ -56,6 +57,57 @@ function App() {
   function deleteAllTodosHandler() {
     setTodo([]);
     localStorage.removeItem("todo");
+    setInput("");
+  }
+
+  // function onCheckHandler(e) {
+  //   if (e.target.checked) {
+  //     setCheckedTodo([...new Set([Number(e.target.value), ...checkedTodo])]);
+  //   } else {
+  //     setCheckedTodo([
+  //       ...new Set(
+  //         checkedTodo.filter((item) => {
+  //           return item !== Number(e.target.value);
+  //         })
+  //       ),
+  //     ]);
+  //   }
+  // }
+
+  // function deleteSelectedTodosHandler() {
+  //   let a;
+  //   if (checkedTodo.length > 0) {
+  //     console.log(checkedTodo);
+  //     checkedTodo.forEach((id) => {
+  //       a = todo.filter((item) => {
+  //         return item.id !== id;
+  //       });
+  //     });
+  //   }
+  //   console.log(a);
+  // }
+
+  function updateCurrentTodo(id, currentTodo) {
+    console.log(id, currentTodo);
+    setTodo(
+      todo.map((item) => {
+        if (item.id === id) {
+          item.title = currentTodo;
+        }
+        return item;
+      })
+    );
+    localStorage.setItem(
+      "todo",
+      JSON.stringify(
+        todo.map((item) => {
+          if (item.id === id) {
+            item.title = currentTodo;
+          }
+          return item;
+        })
+      )
+    );
   }
 
   return (
@@ -68,10 +120,18 @@ function App() {
         />
         {todo.length > 0 && (
           <div className="delete-selected-button-container">
+            {/* <Button onClick={deleteSelectedTodosHandler}>
+              Delete selected
+            </Button> */}
             <Button onClick={deleteAllTodosHandler}>Delete all</Button>
           </div>
         )}
-        <TodoList todo={todo} deleteCurrentTodo={deleteCurrentTodo} />
+        <TodoList
+          todo={todo}
+          deleteCurrentTodo={deleteCurrentTodo}
+          // onCheckHandler={onCheckHandler}
+          updateCurrentTodo={updateCurrentTodo}
+        />
       </div>
     </>
   );

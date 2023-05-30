@@ -2,7 +2,11 @@ import React from "react";
 import "./TodoList.css";
 import TodoItem from "../TodoItem";
 
-export default function TodoList({ todo, deleteCurrentTodo }) {
+export default function TodoList({
+  todo,
+  deleteCurrentTodo,
+  updateCurrentTodo,
+}) {
   return (
     <ul className="todo-list">
       {todo.length !== 0 &&
@@ -10,7 +14,9 @@ export default function TodoList({ todo, deleteCurrentTodo }) {
           <TodoItem
             todo={item}
             deleteCurrentTodo={deleteCurrentTodo}
+            updateCurrentTodo={updateCurrentTodo}
             key={item.id}
+            id={item.id}
           />
         ))}
     </ul>
